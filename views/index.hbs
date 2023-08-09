@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="static/images/q.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickReads.com</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .form-control {
+            border-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    {{>navbar}}
+    {{>naviTwo}}
+    {{>news articles = articles }}
+    {{>contactUs}}
+    <script>    
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbzt4kHYsSyZW9h_2WCxmbeyzxp403Ba4XOdwplKe3QUf5oKOUUL94WIWoL9UCiJ8aiG2Q/exec'
+  const form = document.forms['submit-to-google-sheet']
+  var msg = document.getElementById('msg')
+  var msgSend = "Message sent Successfully";
+
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response =>{
+        console.log("Success!",response);
+        msg.innerHTML = msgSend;
+        setTimeout(function(){
+          msg.innerHTML=''
+        },5000)
+        form.reset()})
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+<!-- Add this script at the end of the HTML body or in your JavaScript file -->
+<script>
+  // Get references to the button and search bar div
+  const toggleButton = document.querySelector(".navbar-toggler");
+  const searchBar = document.querySelector(".collapse");
+
+  // Add click event listener to the button
+  toggleButton.addEventListener("click", function () {
+    // Toggle the 'show' class of the search bar div
+    searchBar.classList.toggle("show");
+  });
+</script>
+
+    <script>    
+    const dropdownButton = document.getElementById('categoryDropdown');
+    const dropdownMenu = document.getElementById('categoryDropdownMenu');
+
+    dropdownButton.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+        const target = event.target;
+        if (!target.matches('.dropdown-toggle')) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+    </script>
+    <script src="https://kit.fontawesome.com/1ec6529d97.js" crossorigin="anonymous"></script>
+    {{!-- <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script> --}}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

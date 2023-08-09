@@ -1,0 +1,31 @@
+ <div class="news-container">
+    <div class="news">
+
+        {{#each articles}}
+        
+        {{#if url}}
+        {{#if urlToImage}}
+        {{!-- {{#unless urlToImage}} --}}
+        <a href="{{url}}" target="_blank" class="news-box Hover-effect">
+            <img src="{{urlToImage}}" alt="Image">
+            {{#if title}}
+            <h3>{{title}}</h3>
+            {{/if}}
+            {{#if description}}
+            <p>{{description}}</p>
+            {{/if}}
+            {{!-- <p>{{{content.replace /<[^>]+>/g ""}}}</p> --}}
+            <br>
+            {{#if publishedAt}}
+            <p style="margin-bottom: 0px; position: absolute; right: 0; bottom: 0; font-family: ui-monospace;">
+                Updated: <span style="color:red;">{{formatDate publishedAt}}</span>
+            </p>
+            {{/if}}
+        </a>
+    {{/if}}
+    {{!-- {{/unless}} --}}
+        {{/if}}
+        {{/each}}
+
+    </div>
+</div>
